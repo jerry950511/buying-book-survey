@@ -1,0 +1,84 @@
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>資工臭甲學期訂書網</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <center><h1>資工臭甲學期訂書網</h1>
+        <h2>開始訂書</h2>
+        <h3>登入ePortal來開始訂書</h3>
+        <p>帳號<input type="text" id = account name="account"></p>
+        <p>密碼<input type="password" id = password name="password"></p>
+        <input type="submit" id = login name = 登入 value="確定登入">
+
+
+
+        <div class="choose area" style="display:none">
+            <p><input type="checkbox" id = "programming_design" name="programming_design">
+                <label for="programming_design">購買 程式設計 課本 -----> Python教學手冊 <-----$514</label></p>
+
+            <p><input type="checkbox" id = "math" name="math">
+                            <label for="math">購買 數學 課本 -----> 老師已統一訂購 若不購買當天不要拿 <-----$???</label></p>
+
+            <p><input type="checkbox" id = "electric" name="electric">
+                <label for="math">購買 電子學 課本 -----> 電子學上冊(附鍛鍊本) <-----$399</label></p>
+                
+            <p><input type="checkbox" id = "chinese" name="chinese">
+            <label for="chinese">購買 國語文 課本 -----> 高中國文三(附習作) <----- $397</label></p>
+            
+            <p><input type="checkbox" id = "english" name="english">
+            <label for="english">購買 英文 課本 -----> English Reader 英文B版 Book3 <-----$260</label></p>
+
+            <p><input type="checkbox" id = "electric_experience" name="electric_experience">
+                <label for="electric_experience">購買 電子學實習 課本 -----> 電子學實習上冊(附實習手冊) <-----$364</label></p>
+
+            <p><input type="checkbox" id = "programming_language" name="programming_language">
+                        <label for="programming_language">購買 程式語言 課本 -----> 尚無資料 <-----$514</label></p>
+
+            <p><input type="checkbox" id = "logic_design" name="logic_design">
+                <label for="logic_design">購買 數位邏輯設計 課本 -----> 數位邏輯設計全一冊(附鍛鍊本) <-----$350</label></p>
+
+            <p><input type="checkbox" id = "chemistry" name="chemistry">
+                <label for="chemistry">購買 化學 課本 -----> 化學全一冊(附鍛鍊本) <-----$350</label></p>
+
+            <p><input type="checkbox" id = "information_safety" name="information_safety">
+                <label for="information_safety">購買 資訊安全 課本 -----> 資訊安全概論 第四版 <-----$350</label></p>
+
+        </div>
+        
+        <script>
+            $(document).ready(function () {
+                var cancel_pd = document.getElementById("programming_language").disabled
+                        = true;
+                var cancel_math = document.getElementById("math").disabled
+                        = true;
+                // function login() {
+                //     var account = document.getElementById("account").value;
+                //     var password = document.getElementById("password").value;
+                //     $.post(".../eportal", data,
+                //         function (data, textStatus, jqXHR) {
+                            
+                //         },
+                //         "dataType"
+                //     );
+                //     if (account == "123" && password == "123") {
+                //         alert("登入成功");
+                //         $(".choose area").show();
+                //     } else {
+                //         alert("登入失敗");
+                //     }
+                // }
+            });
+            
+            
+        </script>
+    </body>
+</html>
