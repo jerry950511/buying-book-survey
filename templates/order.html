@@ -17,11 +17,11 @@
         <h3>登入ePortal來開始訂書</h3>
         <p>帳號<input type="text" id = account name="account"></p>
         <p>密碼<input type="password" id = password name="password"></p>
-        <input type="submit" id = login name = 登入 value="確定登入">
+        <input type="submit" id = login name = 登入 value="確定登入" onclick="login()">
 
 
 
-        <div class="choose area" style="display:none">
+        <div class="choose_area" style="display:none">
             <p><input type="checkbox" id = "programming_design" name="programming_design">
                 <label for="programming_design">購買 程式設計 課本 -----> Python教學手冊 <-----$514</label></p>
 
@@ -55,27 +55,33 @@
         </div>
         
         <script>
+            function login() {
+                var account = document.getElementById("account").value;
+                var password = document.getElementById("password").value;
+                $.ajax({
+                    type: "POST",
+                    url: "/eportal",
+                    data: {
+                        "account": account,
+                        "password": password
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.message == "登入成功") {
+                            alert("登入成功");
+                            $(".choose_area").show();
+                        } else {
+                            alert("登入失敗");
+                        }
+                        // console.log(response)
+                    },
+                });
+            }
             $(document).ready(function () {
                 var cancel_pd = document.getElementById("programming_language").disabled
                         = true;
                 var cancel_math = document.getElementById("math").disabled
                         = true;
-                // function login() {
-                //     var account = document.getElementById("account").value;
-                //     var password = document.getElementById("password").value;
-                //     $.post(".../eportal", data,
-                //         function (data, textStatus, jqXHR) {
-                            
-                //         },
-                //         "dataType"
-                //     );
-                //     if (account == "123" && password == "123") {
-                //         alert("登入成功");
-                //         $(".choose area").show();
-                //     } else {
-                //         alert("登入失敗");
-                //     }
-                // }
             });
             
             
