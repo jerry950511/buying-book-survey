@@ -14,18 +14,25 @@
     <body>
         <center><h1>資工臭甲學期訂書網</h1>
         <h2>開始訂書</h2>
+    <div class="login_area">
         <h3>登入ePortal來開始訂書</h3>
         <p>帳號<input type="text" id = account name="account"></p>
         <p>密碼<input type="password" id = password name="password"></p>
-        <input type="submit" id = login name = 登入 value="確定登入" onclick="login()">
-
+        <input type="submit" id = login name = 登入 value="確定登入">
+    </div>
+    <div class="name_area" style="display: none">
+        <p>登入身份</p>
+        <p>姓名: <span id="name"></span></p>
+        <p>學號: <span id="student_id"></span></p>
+        <p>手機: <span id="number"></span></p>
+    </div>
 
 
         <div class="choose_area" style="display:none">
             <p><input type="checkbox" id = "programming_design" name="programming_design">
                 <label for="programming_design">購買 程式設計 課本 -----> Python教學手冊 <-----$514</label></p>
 
-            <p><input type="checkbox" id = "math" name="math">
+            <p><input type="checkbox" id = "math" name="math" disabled>
                             <label for="math">購買 數學 課本 -----> 老師已統一訂購 若不購買當天不要拿 <-----$???</label></p>
 
             <p><input type="checkbox" id = "electric" name="electric">
@@ -41,7 +48,7 @@
                 <label for="electric_experience">購買 電子學實習 課本 -----> 電子學實習上冊(附實習手冊) <-----$364</label></p>
 
             <p><input type="checkbox" id = "programming_language" name="programming_language">
-                        <label for="programming_language">購買 程式語言 課本 -----> 尚無資料 <-----$514</label></p>
+                        <label for="programming_language">購買 程式語言 課本 -----> 尚無資料 <-----$???</label></p>
 
             <p><input type="checkbox" id = "logic_design" name="logic_design">
                 <label for="logic_design">購買 數位邏輯設計 課本 -----> 數位邏輯設計全一冊(附鍛鍊本) <-----$350</label></p>
@@ -53,38 +60,50 @@
                 <label for="information_safety">購買 資訊安全 課本 -----> 資訊安全概論 第四版 <-----$350</label></p>
 
         </div>
-        
+        </center>
         <script>
-            function login() {
-                var account = document.getElementById("account").value;
-                var password = document.getElementById("password").value;
-                $.ajax({
-                    type: "POST",
-                    url: "/eportal",
-                    data: {
-                        "account": account,
-                        "password": password
-                    },
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.message == "登入成功") {
-                            alert("登入成功");
-                            $(".choose_area").show();
-                        } else {
-                            alert("登入失敗");
-                        }
-                        // console.log(response)
-                    },
-                });
-            }
             $(document).ready(function () {
-                var cancel_pd = document.getElementById("programming_language").disabled
-                        = true;
-                var cancel_math = document.getElementById("math").disabled
-                        = true;
+                $("#login").click(function () {
+                    $("#login").attr("disabled", true);
+                    var account = $("#account").val();
+                    var password = $("#password").val();
+                    $.ajax({
+                        url: "/eportal",
+                        type: "POST",
+                        data: {
+                            account: account,
+                            password: password
+                        },
+                        success: function (data) {
+                            if (data.message == "登入成功") {
+                                alert("登入成功");
+                                $(".choose_area").show();
+                                $(".login_area").hide();
+                                $(".name_area").show();
+                            } else {
+                                alert("帳號或密碼錯誤");
+                                $("#password").val("");
+                                $("#login").attr("disabled", false);
+                            }
+                        }
+                    });
+                    $.ajax({
+                        type: "GET",
+                        url: "/get_info",
+                        data: {
+                            account: account,
+                            password: password
+                        },
+                        success: function (data) {
+                            console.log(data.data);
+                            $("#name").text(data.data.姓名);
+                            $("#student_id").text(data.data.學號);
+                            $("#number").text(data.data.手機);
+                        }
+                        }
+                    );
+                });
             });
-            
-            
         </script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect , jsonify
+from flask import Flask, render_template, request, redirect, url_for, flash , jsonify
 import eportal
 app = Flask(__name__)
 
@@ -22,6 +22,11 @@ def eportal_login():
         return jsonify({"message":"登入成功"})
     else:
         return jsonify({"message":"帳號或密碼錯誤"})
-
+@app.route("/get_info", methods=['GET'])
+def get_info():
+    account = request.args.get('account')
+    password = request.args.get('password')
+    info = eportal.get_info(account,password)
+    return jsonify({"data":info})
 if __name__ == '__main__':
     app.run(debug=True)
