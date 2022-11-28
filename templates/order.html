@@ -24,7 +24,6 @@
         <p>登入身份</p>
         <p>姓名: <span id="name"></span></p>
         <p>學號: <span id="student_id"></span></p>
-        <p>手機: <span id="number"></span></p>
     </div>
 
 
@@ -98,7 +97,6 @@
                             console.log(data.data);
                             $("#name").text(data.data.姓名);
                             $("#student_id").text(data.data.學號);
-                            $("#number").text(data.data.手機);
                         }
                         }
                     );

@@ -24,7 +24,7 @@ def get_info(account,password):
     # 把字串讀取成json
     soup = json.loads(text)
     if soup["res_echo"] == "pass":
-        infodict = {"學號":soup["st_id"],"姓名":soup["st_name"],"手機":soup["phone"]}
+        infodict = {"學號":soup["st_id"],"姓名":soup["st_name"]}
         print(infodict)
         return infodict
     else:
